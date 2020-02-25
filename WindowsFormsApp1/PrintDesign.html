@@ -1,0 +1,67 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <script src="http://localhost:8000/CLodopFuncs.js?priority=0"></script>
+    <script src="http://localhost:18000/CLodopFuncs.js?priority=1"></script>
+    <form id="form1" runat="server">
+        <div>
+            <a id="resetlodop" href='CLodop.protocol:setup' target='_self'>点这里直接再次启动</a>
+            <input type="button" value="打印设计" name="B3" onclick="prn_Design()" />
+            <label>生成代码：</label>
+            <label id="lbPrintCode"></label>
+        </div>
+    </form>
+    <script type="text/javascript">
+        function CheckIsInstall() {
+            try {
+                var LODOP = getLodop();
+                if (LODOP.VERSION) {
+                    if (LODOP.CVERSION)
+                        alert("当前有WEB打印服务C-Lodop可用!\n C-Lodop版本:" + LODOP.CVERSION + "(内含Lodop" + LODOP.VERSION + ")");
+                    else
+                        alert("本机已成功安装了Lodop控件！\n 版本号:" + LODOP.VERSION);
+
+                };
+            } catch (err) {
+            }
+        };
+    </script>
+    <script>
+        function prn_Design() {
+            try {
+                var b = (LODOP == undefined);
+
+            } catch (e) {
+                document.getElementById("lbPrintCode").innerText = "未安装或未启动Lodop！";
+                return;
+            }
+
+            var code;
+            //var LODOP = getLodop();
+            LODOP.SET_LICENSES("杭州集控软件有限公司", "8973E9D5AB0D6676F777D05CE072D5A1", "", "");
+            LODOP.PRINT_DESIGN();
+            LODOP.On_Return = function (TaskID, Value) {
+                if (Value) {
+                    code = Value;
+                } else {
+                    code = "";
+                }
+                document.getElementById("lbPrintCode").innerText = code;
+                if (window.external) {
+                    alert(window.external.GetCode());
+                    window.external.GetCode();
+                } else {
+                    alert("Wrong");
+                }
+               
+                //window.external.button4_Click(null,null);
+                //alert(code);
+            };
+
+        };
+    </script>
+</body>
+</html>
