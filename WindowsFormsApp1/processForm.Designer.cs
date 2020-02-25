@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class progressForm
+    partial class ProgressForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,15 +35,15 @@
             // 
             // pgbMain
             // 
-            this.pgbMain.Location = new System.Drawing.Point(0, 30);
+            this.pgbMain.Location = new System.Drawing.Point(-1, 30);
             this.pgbMain.Name = "pgbMain";
-            this.pgbMain.Size = new System.Drawing.Size(239, 23);
+            this.pgbMain.Size = new System.Drawing.Size(316, 31);
             this.pgbMain.TabIndex = 0;
             // 
             // lblProcessStatus
             // 
             this.lblProcessStatus.AutoSize = true;
-            this.lblProcessStatus.Location = new System.Drawing.Point(245, 40);
+            this.lblProcessStatus.Location = new System.Drawing.Point(129, 9);
             this.lblProcessStatus.Name = "lblProcessStatus";
             this.lblProcessStatus.Size = new System.Drawing.Size(35, 12);
             this.lblProcessStatus.TabIndex = 1;
@@ -51,7 +51,7 @@
             // 
             // btnProcessStop
             // 
-            this.btnProcessStop.Location = new System.Drawing.Point(247, 55);
+            this.btnProcessStop.Location = new System.Drawing.Point(111, 61);
             this.btnProcessStop.Name = "btnProcessStop";
             this.btnProcessStop.Size = new System.Drawing.Size(75, 23);
             this.btnProcessStop.TabIndex = 2;
@@ -59,17 +59,18 @@
             this.btnProcessStop.UseVisualStyleBackColor = true;
             this.btnProcessStop.Click += new System.EventHandler(this.btnProcessStop_Click);
             // 
-            // progressForm
+            // ProgressForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 84);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(315, 85);
             this.Controls.Add(this.btnProcessStop);
             this.Controls.Add(this.lblProcessStatus);
             this.Controls.Add(this.pgbMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "progressForm";
-            this.Text = "processForm";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "ProgressForm";
+            this.Text = "执行中，请耐心等待....";
             this.ResumeLayout(false);
             this.PerformLayout();
 

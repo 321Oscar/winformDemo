@@ -10,23 +10,42 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class progressForm : Form
+    public partial class ProgressForm : Form
     {
         private BackgroundWorker backgroundWorker;
 
-        public progressForm(BackgroundWorker ba)
+        public ProgressForm(BackgroundWorker ba)
         {
             InitializeComponent();
-            //GlobalData
+            this.StartPosition = FormStartPosition.CenterParent;
             this.backgroundWorker = ba;
+            this.backgroundWorker.WorkerReportsProgress = true;//允许 backgroundWorker 报告进度
+            this.backgroundWorker.WorkerSupportsCancellation = true;//backgroundWorker 支持取消异步操作
             this.backgroundWorker.ProgressChanged += backgroundWorkerProgressChanged;
             this.backgroundWorker.RunWorkerCompleted += backgroundWorkerRunWorkerCompleted;
+            if (this.backgroundWorker.IsBusy)
+            {
+                return;
+            }
+            this.backgroundWorker.RunWorkerAsync();
         }
 
         private void backgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            MessageBox.Show("Done");
+            if (e.Cancelled)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                MessageBox.Show("Cancelled");
+            }
+            else if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+            else
+            {
+                this.DialogResult = DialogResult.OK;
+                MessageBox.Show("Done");
+            }
             this.Close();
         }
 
@@ -36,23 +55,7 @@ namespace WindowsFormsApp1
             this.lblProcessStatus.Text = e.UserState.ToString();
         }
 
-        /// <summary>
-        /// 进度信息
-        /// </summary>
-        public string MessageInfo
-        {
-            set { this.lblProcessStatus.Text = value; }
-        }
-
-        /// <summary>
-        /// 进度条值
-        /// </summary>
-        public int ProcessValue
-        {
-            set { this.pgbMain.Value = value; }
-        }
-
-        public progressForm()
+        public ProgressForm()
         {
             InitializeComponent();
         }

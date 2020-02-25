@@ -10,12 +10,12 @@ namespace WindowsFormsApp1
     public class ProcessOperator
     {
         private BackgroundWorker backgroundWorker;
-        private progressForm processForm;
+        private ProgressForm processForm;
 
         public ProcessOperator()
         {
             backgroundWorker = new BackgroundWorker();
-            processForm = new progressForm();
+            processForm = new ProgressForm();
             backgroundWorker.DoWork += backgroundWorker_DoWork;
             backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
         }

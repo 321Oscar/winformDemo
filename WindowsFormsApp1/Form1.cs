@@ -969,6 +969,7 @@ namespace WindowsFormsApp1
                 rtb.Text = 2.ToString();
             }
         }
+
         #region datagridview-combobox
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1219,6 +1220,7 @@ namespace WindowsFormsApp1
             //}
         }
         #endregion
+
         #region LOdop
 
         public string GetCode()
@@ -1303,6 +1305,7 @@ namespace WindowsFormsApp1
             webBrowser1.Document.InvokeScript("print_design_2");
         }
         #endregion
+
         #region 双色球
 
 
@@ -1443,6 +1446,7 @@ namespace WindowsFormsApp1
             }
         }
         #endregion
+
         #region comboboclistview
         private ListViewItem lvItem;
         private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -1557,6 +1561,7 @@ namespace WindowsFormsApp1
             }
         }
         #endregion
+
         #region 获取文件名
         public static SortedList GetDirectoryContents(string url, bool deep)
 
@@ -1968,20 +1973,7 @@ namespace WindowsFormsApp1
         
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            backgroundWorker1.WorkerReportsProgress = true;
-            backgroundWorker1.WorkerSupportsCancellation = true;
-
             startAssembly(e);
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    if (backgroundWorker1.CancellationPending)
-            //    {
-            //        e.Cancel = true;
-            //        break;
-            //    }
-            //    Thread.Sleep(20);
-            //    backgroundWorker1.ReportProgress((i + 1), (i + 1).ToString() + "/100");
-            //}
         }
 
         private void startAssembly(DoWorkEventArgs e)
@@ -1994,29 +1986,17 @@ namespace WindowsFormsApp1
                     break;
                 }
                 Thread.Sleep(20);
+                //设置进度
                 backgroundWorker1.ReportProgress((i + 1), (i + 1).ToString() + "/100");
             }
         }
         
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if(e.Error != null)
-            {
-                MessageBox.Show(e.Error.ToString());
-            }else if (e.Cancelled)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         private void btnProgressBarWorker_Click(object sender, EventArgs e)
         {
-            this.backgroundWorker1.RunWorkerAsync();
-            progressForm process = new progressForm(this.backgroundWorker1);
-            process.ShowDialog();
+            this.backgroundWorker1 = new BackgroundWorker();
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            ProgressForm progress = new ProgressForm(this.backgroundWorker1);
+            progress.ShowDialog();
         }
         #endregion
 
