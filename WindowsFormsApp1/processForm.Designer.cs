@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class processForm
+    partial class progressForm
     {
         /// <summary>
         /// Required designer variable.
@@ -43,7 +43,7 @@
             // lblProcessStatus
             // 
             this.lblProcessStatus.AutoSize = true;
-            this.lblProcessStatus.Location = new System.Drawing.Point(249, 40);
+            this.lblProcessStatus.Location = new System.Drawing.Point(245, 40);
             this.lblProcessStatus.Name = "lblProcessStatus";
             this.lblProcessStatus.Size = new System.Drawing.Size(35, 12);
             this.lblProcessStatus.TabIndex = 1;
@@ -51,14 +51,15 @@
             // 
             // btnProcessStop
             // 
-            this.btnProcessStop.Location = new System.Drawing.Point(251, 55);
+            this.btnProcessStop.Location = new System.Drawing.Point(247, 55);
             this.btnProcessStop.Name = "btnProcessStop";
             this.btnProcessStop.Size = new System.Drawing.Size(75, 23);
             this.btnProcessStop.TabIndex = 2;
             this.btnProcessStop.Text = "终止操作";
             this.btnProcessStop.UseVisualStyleBackColor = true;
+            this.btnProcessStop.Click += new System.EventHandler(this.btnProcessStop_Click);
             // 
-            // processForm
+            // progressForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -67,7 +68,7 @@
             this.Controls.Add(this.lblProcessStatus);
             this.Controls.Add(this.pgbMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "processForm";
+            this.Name = "progressForm";
             this.Text = "processForm";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class processForm : Form
+    public partial class progressForm : Form
     {
         private BackgroundWorker backgroundWorker;
 
-        public processForm(BackgroundWorker ba)
+        public progressForm(BackgroundWorker ba)
         {
             InitializeComponent();
             //GlobalData
             this.backgroundWorker = ba;
-            this.backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(backgroundWorkerProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorkerRunWorkerCompleted);
+            this.backgroundWorker.ProgressChanged += backgroundWorkerProgressChanged;
+            this.backgroundWorker.RunWorkerCompleted += backgroundWorkerRunWorkerCompleted;
         }
 
         private void backgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -52,9 +52,14 @@ namespace WindowsFormsApp1
             set { this.pgbMain.Value = value; }
         }
 
-        public processForm()
+        public progressForm()
         {
             InitializeComponent();
+        }
+
+        private void btnProcessStop_Click(object sender, EventArgs e)
+        {
+            backgroundWorker.CancelAsync();
         }
     }
 }

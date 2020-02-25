@@ -1969,15 +1969,32 @@ namespace WindowsFormsApp1
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             backgroundWorker1.WorkerReportsProgress = true;
-            startAssembly();
+            backgroundWorker1.WorkerSupportsCancellation = true;
+
+            startAssembly(e);
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    if (backgroundWorker1.CancellationPending)
+            //    {
+            //        e.Cancel = true;
+            //        break;
+            //    }
+            //    Thread.Sleep(20);
+            //    backgroundWorker1.ReportProgress((i + 1), (i + 1).ToString() + "/100");
+            //}
         }
 
-        private void startAssembly()
+        private void startAssembly(DoWorkEventArgs e)
         {
             for (int i = 0; i < 100; i++)
             {
+                if (backgroundWorker1.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
                 Thread.Sleep(20);
-                backgroundWorker1.ReportProgress((i+1), (i + 1).ToString()+"/100");
+                backgroundWorker1.ReportProgress((i + 1), (i + 1).ToString() + "/100");
             }
         }
         
@@ -1998,7 +2015,7 @@ namespace WindowsFormsApp1
         private void btnProgressBarWorker_Click(object sender, EventArgs e)
         {
             this.backgroundWorker1.RunWorkerAsync();
-            processForm process = new processForm(this.backgroundWorker1);
+            progressForm process = new progressForm(this.backgroundWorker1);
             process.ShowDialog();
         }
         #endregion
